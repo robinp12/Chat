@@ -26,7 +26,7 @@ server.on("connection", (socket) => {
       });
       //Supprimer tous les messages en cliquant
       socket.on("del", e => {
-        if(e==1){msg = []} 
+        if(e===1){msg = []} 
         server.emit("del", msg);
       })
 
