@@ -1,33 +1,45 @@
-const io = require("socket.io")();
-const server = io.listen(process.env.PORT || 443);
+const PORT = process.env.PORT || 3002;
+const INDEX = '/index.html';
+const express = require("express");
+const socketIO = require("socket.io");
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const io = socketIO(server);
+
+// const io = require("socket.io")();
+// const server = io.listen(process.env.PORT || 443);
 // event fired every time a new client connects:
 var users = [];
 var msg = [];
 
-server.on("connection", (socket) => {
+io.on("connection", (socket) => {
   console.info(`Client connecté [id=${socket.id}]`);
+  setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
 
   socket.on("login", (name) => {
   console.info(`${name} est connecté.e`);
 
     //Ajouter les utilisateurs connectés a la liste sauf l'admin
       users.push(name);
-      server.emit("oldmsg",msg)
+      io.emit("oldmsg",msg)
 
     //Envoyer la liste
-    server.emit("users", users);
+    io.emit("users", users);
 
     //Envoi de message
     socket.on("send", ({ from, desc, to }) => {
       msg.push({from, desc,to });
 
       console.log(from +" a envoyé \"" + desc + "\"");
-        server.emit("send", {from, desc,to });
+        io.emit("send", {from, desc,to });
       });
       //Supprimer tous les messages en cliquant
       socket.on("del", e => {
         if(e===1){msg = []} 
-        server.emit("del", msg);
+        io.emit("del", msg);
       })
 
     //Deconnexion
@@ -36,7 +48,7 @@ server.on("connection", (socket) => {
       users.splice(users.indexOf(name), 1);
       console.info(`${name} est déconnecté.e`);
       //Envoyer la nouvelle liste des utilisateurs connecté
-      server.emit("users", users);
+      io.emit("users", users);
     });
   });
 });

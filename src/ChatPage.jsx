@@ -4,7 +4,7 @@ import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient("/chatkot12.herokuapp.com", {
+const socket = socketIOClient("localhost:3002", {
     transports: ["websocket"],
 secure: true,
 });
@@ -32,6 +32,7 @@ const ChatPage = () => {
         e.preventDefault();
         socket.emit("send", { from: name, desc: desc, to:"others"});
     };
+    socket.on("time",e => console.log(e))
     
     useEffect(() => {
         socket.on("users", (e) => {setUsers(e); console.log(e)})    
