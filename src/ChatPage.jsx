@@ -6,7 +6,7 @@ import socketIOClient from "socket.io-client";
 const port = process.env.PORT || 3002;
 console.log(port)
 
-const socket = socketIOClient("localhost:"+port, {
+const socket = socketIOClient("/", {
     transports: ["websocket"],
 secure: true,
 });
