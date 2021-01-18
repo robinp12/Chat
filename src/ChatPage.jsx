@@ -4,7 +4,7 @@ import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient("", {
+const socket = socketIOClient("/", {
     transports: ["websocket"],
 secure: true,
 });

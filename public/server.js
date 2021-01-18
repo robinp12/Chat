@@ -1,5 +1,5 @@
 const io = require("socket.io")();
-const server = io.listen(3002);
+const server = io.listen(process.env.PORT || 3002);
 // event fired every time a new client connects:
 var users = [];
 var msg = [];
