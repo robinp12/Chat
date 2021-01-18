@@ -17,7 +17,6 @@ var msg = [];
 
 io.on("connection", (socket) => {
   console.info(`Client connecté [id=${socket.id}]`);
-  setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
 
   socket.on("login", (name) => {
   console.info(`${name} est connecté.e`);
