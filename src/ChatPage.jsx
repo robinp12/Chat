@@ -4,7 +4,7 @@ import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
 
 const port = process.env.PORT || 3002;
-const socket = socketIOClient("chatkot12.herokuapp.com:"+port, {
+const socket = socketIOClient("chatkot12.herokuapp.com:3002", {
     transports: ["websocket"],
 secure: true,
 });
@@ -39,11 +39,9 @@ const ChatPage = () => {
         socket.on("send", e => 
         setMessage((prev) => [...prev, e])        
         )
-        console.log(socket.io)
         
         socket.on("del",e => setMessage([]))
     }, [])
-console.log(process.env)
 
     return (
         <>
