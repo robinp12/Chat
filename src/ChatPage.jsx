@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { socket } from '../../../config';
 import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
@@ -16,7 +15,7 @@ const ChatPage = () => {
     const [click, setClick] = useState(false);
     
     const handleChange = ({currentTarget}) => {
-        const {value,name }= currentTarget;
+        const {value }= currentTarget;
             setName(value);
     }
     const login = () => {
@@ -32,7 +31,6 @@ const ChatPage = () => {
         socket.emit("send", { from: name, desc: desc, to:"others"});
     };
     socket.on("time",e => console.log(e))
-    
     useEffect(() => {
         socket.on("users", (e) => {setUsers(e); console.log(e)})    
         socket.on("oldmsg",e => setMessage(e))
