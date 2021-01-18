@@ -3,11 +3,8 @@ import React, { useEffect, useState } from 'react';
 import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
-
-const socket = socketIOClient("localhost:3002", {
-    transports: ["websocket"],
-secure: true,
-});
+import io from "/socket.io/socket.io.js";
+const socket = io();
 
 const ChatPage = () => {
     const [users, setUsers] = useLocalStorage("chat-users", []);
