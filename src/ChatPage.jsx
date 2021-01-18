@@ -4,7 +4,9 @@ import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
 
 const port = process.env.PORT || 3002;
-const socket = socketIOClient("/", {
+console.log(port)
+
+const socket = socketIOClient("chatkot12.herokuapp.com:11439", {
     transports: ["websocket"],
 secure: true,
 });
