@@ -4,10 +4,13 @@ import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient("192.168.1.16:3002", {
+let address = "";
+const socket = socketIOClient("localhost:3002", {
     transports: ["websocket"],
 secure: true,
 });
+console.log(address)
+
 const ChatPage = () => {
     const [users, setUsers] = useLocalStorage("chat-users", []);
     const [message, setMessage] = useState([])
@@ -16,8 +19,13 @@ const ChatPage = () => {
     const [click, setClick] = useState(false);
     
     const handleChange = ({currentTarget}) => {
-        const {value}= currentTarget;
-        setName(value);
+        const {value,name }= currentTarget;
+        if(name=="address"){
+            address = value;
+        }
+        else{
+            setName(value);
+        }
     }
     const login = () => {
         setClick(true)
@@ -44,12 +52,14 @@ console.log(process.env)
 
     return (
         <>
+        <input type="text" name="address" placeholder="Votre adresse ..." onChange={handleChange} />
         {!click ? <>
         <input type="text" name="name" placeholder="Votre nom ..." value={name} onChange={handleChange} disabled={name}/>
         <button onClick={() => login()} disabled={!name}>Valider</button></>
         :
             <div className="row">
                 <div className="">
+                    {address}
                     <div className="card mb-3 body-chat">
                         <h3 className="card-header text-dark">Utilisateurs</h3>
                         <div className="card-body">
