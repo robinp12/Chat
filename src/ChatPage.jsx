@@ -6,7 +6,7 @@ import socketIOClient from "socket.io-client";
 const port = process.env.PORT || 3002;
 console.log(port)
 
-const socket = socketIOClient("chatkot12.herokuapp.com:11439", {
+const socket = socketIOClient("chatkot12.herokuapp.com:"+port, {
     transports: ["websocket"],
 secure: true,
 });
