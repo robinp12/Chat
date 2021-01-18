@@ -3,10 +3,7 @@ import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
 
-const port = process.env.PORT || 3002;
-console.log(port)
-
-const socket = socketIOClient("/", {
+const socket = socketIOClient("chatkot12.herokuapp.com:3002", {
     transports: ["websocket"],
 secure: true,
 });
