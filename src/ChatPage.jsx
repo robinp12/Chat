@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 import socketIOClient from "socket.io-client";
+
+const port = process.env.PORT || 3002;
 const socket = socketIOClient("/", {
     transports: ["websocket"],
 secure: true,
