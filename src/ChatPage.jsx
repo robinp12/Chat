@@ -44,20 +44,20 @@ console.log(process.env)
 
     return (
         <>
-        {!click && <>
+        {!click ? <>
         <input type="text" name="name" placeholder="Votre nom ..." value={name} onChange={handleChange} disabled={name}/>
         <button onClick={() => login()} disabled={!name}>Valider</button></>
-        ||
+        :
             <div className="row">
                 <div className="">
-                    <div className="card mb-3">
+                    <div className="card mb-3 body-chat">
                         <h3 className="card-header text-dark">Utilisateurs</h3>
                         <div className="card-body">
                             {users.map((e, index) => <li key={index} className="list-group-item text-dark" >{e}</li>)}
                         </div>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col ">
                     <OrderChat send={send} message={message} me={name} setMessage={setMessage} del={del} />
                 </div>
             </div>

@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.body-chat{
+  min-height: 50vh;
+}
