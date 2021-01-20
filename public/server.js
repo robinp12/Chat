@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT+1 || 3002;
 const INDEX = '/index.html';
 const express = require("express");
 const fs = require("fs");
