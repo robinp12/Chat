@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import socketIOClient from "socket.io-client";
 import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
-import socketIOClient from "socket.io-client";
 
 const port = process.env.PORT || 3002;
-const socket = socketIOClient("//:3002", {
+const socket = socketIOClient("//:"+port, {
     transports: ["websocket"],
 });
 
-const ChatPage = () => {
+const ChatPage = ({click, setClick}) => {
     const [users, setUsers] = useLocalStorage("chat-users", []);
     const [message, setMessage] = useState([])
 
     const [name, setName] = useLocalStorage("me","");
-    const [click, setClick] = useState(false);
     
     const handleChange = ({currentTarget}) => {
         const {value }= currentTarget;
