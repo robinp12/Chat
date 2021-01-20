@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 import OrderChat from './OrderChat';
 import useLocalStorage from './useLocalStorage';
 
-const port = process.env.PORT+1 || 3002;
+const port = process.env.PORT || 3002;
 const socket = socketIOClient("//:"+port, {
     transports: ["websocket"],
 });
