@@ -7,6 +7,7 @@ const port = process.env.PORT || 3002;
 const socket = socketIOClient("//:"+port, {
     transports: ["websocket"],
 });
+console.log(process.env)
 
 const ChatPage = ({click, setClick}) => {
     const [users, setUsers] = useLocalStorage("chat-users", []);

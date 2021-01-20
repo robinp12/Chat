@@ -15,7 +15,6 @@ const io = socketIO(server);
 // event fired every time a new client connects:
 var users = [];
 var msg = [];
-
 io.on("connection", (socket) => {
   console.info(`Client connecté [id=${socket.id}]`);
   setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
